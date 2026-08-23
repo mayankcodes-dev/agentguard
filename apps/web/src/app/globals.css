@@ -2,34 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── Design tokens ──────────────────────────────────────────────────────── */
+/* ─── Design tokens — LIGHT (default) ────────────────────────────────────── */
 :root {
-  --bg-0: #09090b;
-  --bg-100: #18181b;
-  --bg-200: #27272a;
-  --bg-300: #3f3f46;
-  --text-100: #fafafa;
-  --text-200: #e4e4e7;
-  --text-300: #a1a1aa;
-  --text-400: #71717a;
+  --bg-0:    #ffffff;
+  --bg-100:  #f8fafc;
+  --bg-200:  #f1f5f9;
+  --bg-300:  #e2e8f0;
+  --text-100: #0f172a;
+  --text-200: #1e293b;
+  --text-300: #475569;
+  --text-400: #94a3b8;
   --radius: 0.5rem;
 
-  /* shadcn compat */
-  --background: 240 10% 3.9%;
-  --foreground: 0 0% 98%;
-  --card: 240 10% 3.9%;
+  /* shadcn compat — light */
+  --background:  0 0% 100%;
+  --foreground:  222.2 47.4% 11.2%;
+  --card:        0 0% 100%;
+  --card-foreground: 222.2 47.4% 11.2%;
+  --border:      214.3 31.8% 91.4%;
+  --input:       214.3 31.8% 91.4%;
+  --primary:     180 100% 35%;
+  --primary-foreground: 0 0% 100%;
+  --muted:       210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent:      210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --ring:        180 100% 35%;
+}
+
+/* ─── Design tokens — DARK ────────────────────────────────────────────────── */
+.dark {
+  --bg-0:    #020617;
+  --bg-100:  #0f172a;
+  --bg-200:  #1e293b;
+  --bg-300:  #334155;
+  --text-100: #f8fafc;
+  --text-200: #e2e8f0;
+  --text-300: #94a3b8;
+  --text-400: #64748b;
+
+  /* shadcn compat — dark */
+  --background:  240 10% 3.9%;
+  --foreground:  0 0% 98%;
+  --card:        240 10% 3.9%;
   --card-foreground: 0 0% 98%;
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
-  --primary: 180 100% 50%;
+  --border:      240 3.7% 15.9%;
+  --input:       240 3.7% 15.9%;
+  --primary:     180 100% 50%;
   --primary-foreground: 240 5.9% 10%;
-  --muted: 240 3.7% 15.9%;
+  --muted:       240 3.7% 15.9%;
   --muted-foreground: 240 5% 64.9%;
-  --accent: 240 3.7% 15.9%;
+  --accent:      240 3.7% 15.9%;
   --accent-foreground: 0 0% 98%;
   --destructive: 0 62.8% 30.6%;
-  --ring: 180 100% 50%;
-  --radius: 0.5rem;
+  --ring:        180 100% 50%;
 }
 
 * { @apply border-border; }
@@ -37,6 +64,7 @@ body {
   background: var(--bg-0);
   color: var(--text-100);
   font-feature-settings: "rlig" 1, "calt" 1;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ─── Hero fade-slide-in animations ──────────────────────────────────────── */

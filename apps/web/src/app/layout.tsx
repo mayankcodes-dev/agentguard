@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { ClerkProvider } from '@clerk/nextjs';
 import { LenisProvider } from '@/components/lenis-provider';
+import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -25,7 +26,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             rel="stylesheet"
           />
         </head>
-        <body className="font-sans antialiased"><LenisProvider>{children}</LenisProvider></body>
+        <body className="font-sans antialiased">
+          <ThemeProvider>
+            <LenisProvider>{children}</LenisProvider>
+          </ThemeProvider>
+        </body>
       </html>
     </ClerkProvider>
   );

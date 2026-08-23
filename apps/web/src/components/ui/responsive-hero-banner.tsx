@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useTheme } from 'next-themes';
 
 interface NavLink { label: string; href: string; isActive?: boolean; }
 
@@ -13,18 +14,18 @@ const NAV_LINKS: NavLink[] = [
 ];
 
 const TECH_STACK = [
-  { name: "MongoDB",    icon: "https://cdn.simpleicons.org/mongodb/ffffff"    },
-  { name: "Redis",      icon: "https://cdn.simpleicons.org/redis/ffffff"      },
-  { name: "Gemini AI",  icon: "https://cdn.simpleicons.org/googlegemini/ffffff" },
-  { name: "BullMQ",     icon: "https://cdn.simpleicons.org/bull/ffffff"       },
-  { name: "Fastify",    icon: "https://cdn.simpleicons.org/fastify/ffffff"    },
-  { name: "Next.js 14", icon: "https://cdn.simpleicons.org/nextdotjs/ffffff"  },
-  { name: "TypeScript", icon: "https://cdn.simpleicons.org/typescript/ffffff" },
+  { name: "MongoDB",    slug: "mongodb",      brandColor: "#47A248" },
+  { name: "Redis",      slug: "redis",        brandColor: "#FF4438" },
+  { name: "Gemini AI",  slug: "googlegemini", brandColor: "#8E75B2" },
+  { name: "Fastify",    slug: "fastify",      brandColor: "#000000" },
+  { name: "Next.js 14", slug: "nextdotjs",    brandColor: "#000000" },
+  { name: "TypeScript", slug: "typescript",   brandColor: "#3178C6" },
 ];
 
 const ResponsiveHeroBanner: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const { resolvedTheme, setTheme } = useTheme();
   return (
     <section className="w-full isolate min-h-screen overflow-hidden relative">
       {/* Full-bleed dark background image — dark circuit board */}
@@ -64,6 +65,21 @@ const ResponsiveHeroBanner: React.FC = () => {
                     {link.label}
                   </a>
                 ))}
+                <button
+                  onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+                  className="ml-1 inline-flex h-8 w-8 items-center justify-center rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+                  aria-label="Toggle theme"
+                >
+                  {resolvedTheme === 'dark' ? (
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                  ) : (
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                  )}
+                </button>
                 <Link href="/dashboard"
                   className="ml-1 inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-900 hover:bg-white/90 font-sans transition-colors">
                   Dashboard
@@ -161,17 +177,25 @@ const ResponsiveHeroBanner: React.FC = () => {
               Powered by battle-tested infrastructure
             </p>
             <div className="flex items-end justify-center gap-8 flex-wrap">
-              {TECH_STACK.map(({ name, icon }) => (
-                <div key={name} className="flex flex-col items-center gap-2 group">
+              {TECH_STACK.map(({ name, slug, brandColor }) => (
+                <div key={name} className="flex flex-col items-center gap-2 group relative">
+                  {/* default: white faded icon */}
                   <img
-                    src={icon}
+                    src={`https://cdn.simpleicons.org/${slug}/ffffff`}
                     alt={name}
                     width={28}
                     height={28}
-                    className="opacity-30 group-hover:opacity-70 transition-opacity duration-300"
-                    style={{ filter: 'brightness(2)' }}
+                    className="opacity-25 group-hover:opacity-0 transition-all duration-300 absolute"
                   />
-                  <span className="text-xs text-white/25 font-sans group-hover:text-white/50 transition-colors">{name}</span>
+                  {/* hover: brand color icon */}
+                  <img
+                    src={`https://cdn.simpleicons.org/${slug}/${brandColor.replace('#', '')}`}
+                    alt=""
+                    width={28}
+                    height={28}
+                    className="opacity-0 group-hover:opacity-90 transition-all duration-300"
+                  />
+                  <span className="text-xs text-white/25 font-sans group-hover:text-white/60 transition-colors">{name}</span>
                 </div>
               ))}
             </div>

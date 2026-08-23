@@ -272,44 +272,6 @@ export default function LandingPage() {
       </section>
 
 
-      {/* ─── PIPELINE STEPPER — horizontal, no wrap ─────────────────────────────── */}
-      <section className="py-20 px-6 bg-slate-900/40 overflow-x-auto">
-        <div className="max-w-6xl mx-auto min-w-max">
-          <p className="text-xs text-slate-600 uppercase tracking-widest mb-10 text-center min-w-0">How a single run works</p>
-          <div className="flex items-center justify-center gap-0">
-            {[
-              { step: "Create evaluation", icon: "⚙" },
-              { step: "Pressure scenario", icon: "⚡" },
-              { step: "Agent execution", icon: "🤖" },
-              { step: "Live SSE logs", icon: "📡" },
-              { step: "Failure detected", icon: "🔍" },
-              { step: "Classification", icon: "🏷" },
-              { step: "Score", icon: "📊" },
-            ].map((s, i, arr) => (
-              <div key={s.step} className="flex items-center">
-                <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.07 }}
-                  className="flex flex-col items-center gap-2 px-5 py-5 rounded-2xl bg-slate-950 ring-1 ring-white/[0.06] hover:ring-cyan-500/40 hover:bg-slate-900 transition-all group w-36"
-                >
-                  <span className="text-2xl">{s.icon}</span>
-                  <span className="text-xs font-mono text-slate-500 group-hover:text-white transition-colors text-center leading-tight">{s.step}</span>
-                </motion.div>
-                {i < arr.length - 1 && (
-                  <div className="flex items-center px-1">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-slate-700">
-                      <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ─── WHY CI/CD ISN'T ENOUGH — 3 comparison cards + Spline 3D ───────────── */}
       <section className="py-32 px-6">
         <div className="max-w-6xl mx-auto">
