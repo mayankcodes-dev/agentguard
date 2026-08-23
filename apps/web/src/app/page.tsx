@@ -2,6 +2,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import Link from 'next/link';
+import AgentGuardHero from '@/components/ui/hero-banner';
+
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 const TERMINAL_LINES = [

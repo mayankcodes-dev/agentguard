@@ -17,7 +17,7 @@
     "mongoose": "^8.4.0",
     "bullmq": "^5.7.0",
     "ioredis": "^5.4.0",
-    "openai": "^4.52.0",
+    "@google/generative-ai": "^0.21.0",
     "http-proxy-middleware": "^3.0.0",
     "uuid": "^10.0.0",
     "zod": "^3.23.0",

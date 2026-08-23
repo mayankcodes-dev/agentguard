@@ -38,6 +38,9 @@ importers:
       '@fastify/sensible':
         specifier: ^5.6.0
         version: 5.6.0
+      '@google/generative-ai':
+        specifier: ^0.21.0
+        version: 0.21.0
       bullmq:
         specifier: ^5.7.0
         version: 5.81.3
@@ -56,9 +59,6 @@ importers:
       mongoose:
         specifier: ^8.4.0
         version: 8.24.3
-      openai:
-        specifier: ^4.52.0
-        version: 4.104.0(zod@3.25.76)
       uuid:
         specifier: ^10.0.0
         version: 10.0.0
@@ -496,6 +496,10 @@ packages:
 
   '@floating-ui/utils@0.2.12':
     resolution: {integrity: sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==}
+
+  '@google/generative-ai@0.21.0':
+    resolution: {integrity: sha512-7XhUbtnlkSEZK15kN3t+tzIMxsbKm/dSkKBFalj+20NvPKe1kBY7mR2P7vuijEn+f06z5+A8bVGKO0v39cr6Wg==}
+    engines: {node: '>=18.0.0'}
 
   '@humanwhocodes/config-array@0.13.0':
     resolution: {integrity: sha512-DZLEEqFWQFiyK6h5YIeynKx7JlvCYWL0cImfSRXZ9l4Sg2efkFGTuFf6vzXjK1cq6IYkU+Eg/JizXw+TD2vRNw==}
@@ -2931,6 +2935,8 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
 
   '@floating-ui/utils@0.2.12': {}
+
+  '@google/generative-ai@0.21.0': {}
 
   '@humanwhocodes/config-array@0.13.0':
     dependencies:
