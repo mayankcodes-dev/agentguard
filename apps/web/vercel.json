@@ -1,0 +1,7 @@
+{
+  "buildCommand": "cd ../.. && pnpm --filter @agentguard/web build",
+  "outputDirectory": "apps/web/.next",
+  "installCommand": "pnpm install",
+  "framework": "nextjs",
+  "rewrites": []
+}
