@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import Link from 'next/link';
 import ResponsiveHeroBanner from '@/components/ui/responsive-hero-banner';
+import { SplineScene } from '@/components/ui/spline-scene';
 
 
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -267,6 +268,220 @@ export default function LandingPage() {
               <div className="text-sm text-slate-500">{desc}</div>
             </div>
           ))}
+        </div>
+      </section>
+
+
+      {/* ─── OUR STORY — narrative statements (from the brief) ─────────────────── */}
+      <section className="py-24 px-6 overflow-hidden">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-xs text-slate-600 uppercase tracking-widest mb-12 text-center">The insight behind AgentGuard</p>
+          {[
+            "AI agents can pass traditional software tests while still failing behaviorally under adversarial pressure.",
+            "We built a CI/CD layer that continuously pressure-tests agents before deployment.",
+            "It combines deterministic trace analysis with semantic LLM evaluation.",
+            "Failures are classified, scored, streamed in real time, and stored as actionable traces.",
+            "Developers can identify and fix dangerous agent behavior before it reaches production.",
+          ].map((line, i) => (
+            <motion.div key={i}
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ delay: i * 0.12, duration: 0.5 }}
+              className="flex items-start gap-4 mb-8 group"
+            >
+              {i < 4 && (
+                <div className="flex flex-col items-center flex-shrink-0 mt-1">
+                  <div className="w-0.5 h-0 group-hover:h-8 bg-cyan-500/30 transition-all duration-500" />
+                </div>
+              )}
+              <div className="pl-5 border-l-2 border-cyan-500/20 group-hover:border-cyan-400/60 transition-colors">
+                <p className="text-lg sm:text-xl text-white/80 leading-relaxed group-hover:text-white transition-colors">
+                  {line}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ─── PIPELINE FLOW — the run steps from image 2 ─────────────────────────── */}
+      <section className="py-16 px-6 bg-slate-900/40">
+        <div className="max-w-5xl mx-auto">
+          <p className="text-xs text-slate-600 uppercase tracking-widest mb-10 text-center">How a single run works</p>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            {[
+              { step: "Create evaluation", icon: "⚙" },
+              { step: "Pressure scenario", icon: "⚡" },
+              { step: "Agent execution", icon: "🤖" },
+              { step: "Live SSE logs", icon: "📡" },
+              { step: "Failure detected", icon: "🔍" },
+              { step: "Classification", icon: "🏷" },
+              { step: "Score", icon: "📊" },
+            ].map((s, i, arr) => (
+              <div key={s.step} className="flex items-center gap-2">
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className="flex flex-col items-center gap-2 px-5 py-4 rounded-2xl bg-slate-950 ring-1 ring-white/[0.06] hover:ring-cyan-500/30 transition-all group"
+                >
+                  <span className="text-xl">{s.icon}</span>
+                  <span className="text-xs font-mono text-slate-400 group-hover:text-white transition-colors whitespace-nowrap">{s.step}</span>
+                </motion.div>
+                {i < arr.length - 1 && (
+                  <span className="text-slate-700 text-lg">↓</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── WHY CI/CD ISN'T ENOUGH — 3 comparison cards + Spline 3D ───────────── */}
+      <section className="py-32 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4 leading-tight">
+              Why existing CI/CD isn't enough
+              <br /><span className="text-cyan-400">for AI agents</span>
+            </h2>
+            <p className="text-slate-500 text-lg max-w-2xl mx-auto">
+              Traditional test frameworks have no concept of tool calls, LLM behavior, or adversarial pressure.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16">
+            {/* Card 1 — Deterministic tests */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0 }}
+              className="relative p-7 rounded-2xl bg-slate-900 ring-1 ring-white/[0.06] overflow-hidden group"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-slate-800/20 to-transparent" />
+              <div className="relative">
+                <div className="text-3xl mb-5">🧪</div>
+                <h3 className="text-lg font-bold text-white mb-2">Deterministic tests</h3>
+                <div className="text-xs text-cyan-400/80 font-mono mb-4 bg-cyan-500/10 inline-flex px-2 py-1 rounded-lg ring-1 ring-cyan-500/20">
+                  Catches expected failures
+                </div>
+                <p className="text-slate-400 text-sm leading-relaxed">
+                  Unit tests and assertions can verify fixed inputs → expected outputs. But agents are non-deterministic — the same prompt gives different behavior under pressure.
+                </p>
+                <div className="mt-5 pt-5 border-t border-white/[0.05] text-xs text-red-400/70">
+                  ✗ Can't catch: prompt injection, goal drift, hallucinated confidence
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Card 2 — LLM evaluation */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="relative p-7 rounded-2xl bg-slate-900 ring-1 ring-white/[0.06] overflow-hidden group"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-slate-800/20 to-transparent" />
+              <div className="relative">
+                <div className="text-3xl mb-5">🤖</div>
+                <h3 className="text-lg font-bold text-white mb-2">LLM evaluation</h3>
+                <div className="text-xs text-yellow-400/80 font-mono mb-4 bg-yellow-500/10 inline-flex px-2 py-1 rounded-lg ring-1 ring-yellow-500/20">
+                  Catches semantic failures
+                </div>
+                <p className="text-slate-400 text-sm leading-relaxed">
+                  LLM-as-judge can evaluate nuanced behavior. But it's expensive, slow, and inconsistent — the evaluator itself can be prompt-injected or hallucinate verdicts.
+                </p>
+                <div className="mt-5 pt-5 border-t border-white/[0.05] text-xs text-yellow-400/70">
+                  ⚠ Slow, costly, non-deterministic at scale
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Card 3 — AgentGuard hybrid */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="relative p-7 rounded-2xl bg-gradient-to-br from-cyan-950/60 to-slate-900 ring-1 ring-cyan-500/30 overflow-hidden group"
+            >
+              <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl" />
+              <div className="relative">
+                <div className="text-3xl mb-5">⚡</div>
+                <h3 className="text-lg font-bold text-white mb-2">Our hybrid approach</h3>
+                <div className="text-xs text-cyan-400 font-mono mb-4 bg-cyan-500/15 inline-flex px-2 py-1 rounded-lg ring-1 ring-cyan-500/30">
+                  Best of both worlds
+                </div>
+                <p className="text-slate-400 text-sm leading-relaxed">
+                  Deterministic trace analysis catches structural failures instantly (F01–F03, F05, F08–F10). LLM semantic judge covers the rest (F04, F06, F07, F11, F12). Together: 12 failure classes, zero guessing.
+                </p>
+                <div className="mt-5 pt-5 border-t border-cyan-500/20 text-xs text-cyan-400/80">
+                  ✓ Fast + thorough + auditable traces
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Spline 3D element — cybersecurity orb */}
+          <div className="relative rounded-3xl overflow-hidden ring-1 ring-white/[0.06] bg-slate-950"
+               style={{ height: '380px' }}>
+            <SplineScene className="absolute inset-0 w-full h-full" />
+            {/* Overlay text so it reads clearly */}
+            <div className="absolute inset-0 flex flex-col items-start justify-end p-8 pointer-events-none"
+                 style={{ background: 'linear-gradient(to top, rgba(9,9,11,0.85) 0%, transparent 60%)' }}>
+              <div className="text-xs font-mono text-cyan-400/60 mb-1">AgentGuard Engine</div>
+              <div className="text-xl font-bold text-white">Real-time adversarial analysis</div>
+              <div className="text-sm text-slate-400 mt-1">83 scenarios · 12 failure types · 5 pressure levels</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── REAL NUMBERS — proof section (no fake benchmarks) ──────────────────── */}
+      <section className="py-24 px-6 bg-slate-900/40">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-3">Real numbers. No fake benchmarks.</h2>
+            <p className="text-slate-500">Everything here is measurable from the actual system running on your machine right now.</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mb-8">
+            {[
+              { n: "83", label: "Scenarios generated", sub: "per agent registration", color: "text-cyan-400" },
+              { n: "12", label: "Failure classes", sub: "F01–F12, fully documented", color: "text-violet-400" },
+              { n: "<2s", label: "Per scenario", sub: "deterministic evaluation", color: "text-emerald-400" },
+              { n: "3", label: "BullMQ workers", sub: "parallel async processing", color: "text-orange-400" },
+            ].map(({ n, label, sub, color }) => (
+              <motion.div key={label}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="p-6 rounded-2xl bg-slate-950 ring-1 ring-white/[0.06] text-center"
+              >
+                <div className={`text-4xl font-black mb-1 ${color}`}>{n}</div>
+                <div className="text-sm font-semibold text-white mb-0.5">{label}</div>
+                <div className="text-xs text-slate-600">{sub}</div>
+              </motion.div>
+            ))}
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              { icon: "📡", label: "SSE streaming", desc: "Live logs streamed token-by-token to browser — zero polling" },
+              { icon: "🔒", label: "Sandbox isolation", desc: "All tool calls mocked — no real side effects, no data mutations" },
+              { icon: "📋", label: "Actionable traces", desc: "Every failure shows exact tool call sequence + LLM reasoning" },
+            ].map(({ icon, label, desc }) => (
+              <div key={label} className="flex gap-4 p-5 rounded-2xl bg-slate-950 ring-1 ring-white/[0.04]">
+                <div className="text-2xl flex-shrink-0">{icon}</div>
+                <div>
+                  <div className="font-semibold text-white text-sm mb-1">{label}</div>
+                  <div className="text-xs text-slate-500 leading-relaxed">{desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
