@@ -1,38 +1,112 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
   <defs>
+    <!-- Main shield gradient: cyan top-left to deep blue bottom-right -->
     <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#22c55e"/>
-      <stop offset="100%" stop-color="#16a34a"/>
+      <stop offset="0%" stop-color="#00e5ff"/>
+      <stop offset="40%" stop-color="#00b4d8"/>
+      <stop offset="100%" stop-color="#1a56db"/>
     </linearGradient>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+    <!-- Checkerboard pattern for right half of shield -->
+    <pattern id="checker" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+      <rect width="5" height="5" fill="rgba(0,180,220,0.6)"/>
+      <rect x="5" y="5" width="5" height="5" fill="rgba(0,180,220,0.6)"/>
+      <rect x="5" y="0" width="5" height="5" fill="rgba(26,86,219,0.6)"/>
+      <rect x="0" y="5" width="5" height="5" fill="rgba(26,86,219,0.6)"/>
+    </pattern>
+    <clipPath id="shieldClip">
+      <path d="M100 12 L170 38 L170 96 C170 138 138 166 100 180 C62 166 30 138 30 96 L30 38 Z"/>
+    </clipPath>
+    <!-- Pixel dissolve mask: left side -->
+    <clipPath id="leftHalf">
+      <rect x="0" y="0" width="100" height="200"/>
+    </clipPath>
+    <clipPath id="rightHalf">
+      <rect x="100" y="0" width="100" height="200"/>
+    </clipPath>
+    <!-- Glow filter -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
-      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#22c55e" flood-opacity="0.3"/>
+    <filter id="cyanGlow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 1 1 0 0  0 1 1 0 0  0 0 1 0 0  0 0 0 0.8 0" result="colored"/>
+      <feMerge><feMergeNode in="colored"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
 
-  <!-- Shield body -->
-  <path d="M100 18 L162 42 L162 90 C162 130 134 160 100 174 C66 160 38 130 38 90 L38 42 Z"
-    fill="url(#shieldGrad)" filter="url(#shadow)"/>
+  <!-- Shield base: solid gradient -->
+  <path d="M100 12 L170 38 L170 96 C170 138 138 166 100 180 C62 166 30 138 30 96 L30 38 Z"
+    fill="url(#shieldGrad)"/>
 
-  <!-- Shield inner highlight -->
-  <path d="M100 26 L154 47 L154 90 C154 126 129 153 100 166 C71 153 46 126 46 90 L46 47 Z"
-    fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+  <!-- Right half checkerboard overlay -->
+  <path d="M100 12 L170 38 L170 96 C170 138 138 166 100 180 L100 12 Z"
+    fill="url(#checker)" opacity="0.7"/>
 
-  <!-- AG letters -->
-  <text x="100" y="108" text-anchor="middle"
-    font-family="'Arial Black', 'Arial', sans-serif"
-    font-size="46" font-weight="900" letter-spacing="-2"
-    fill="#0a0a0a" filter="url(#glow)">AG</text>
+  <!-- Shield inner glow border -->
+  <path d="M100 18 L164 42 L164 96 C164 134 135 160 100 173 C65 160 36 134 36 96 L36 42 Z"
+    fill="none" stroke="rgba(0,229,255,0.4)" stroke-width="1.5"/>
 
-  <!-- Wordmark -->
-  <text x="100" y="148" text-anchor="middle"
-    font-family="'Arial', sans-serif"
-    font-size="11" font-weight="600" letter-spacing="3"
-    fill="#1e293b" text-transform="uppercase">AGENTGUARD</text>
+  <!-- CIRCUIT NODES (3 keys/nodes like in the reference) -->
+  <!-- Node 1 - top -->
+  <g filter="url(#glow)">
+    <!-- horizontal line -->
+    <line x1="72" y1="72" x2="130" y2="72" stroke="#050505" stroke-width="7" stroke-linecap="round"/>
+    <!-- circle node end -->
+    <circle cx="130" cy="72" r="10" fill="#050505"/>
+    <circle cx="130" cy="72" r="5" fill="#111"/>
+    <!-- vertical drop from circle -->
+    <line x1="130" y1="82" x2="130" y2="88" stroke="#050505" stroke-width="7" stroke-linecap="round"/>
+  </g>
+
+  <!-- Node 2 - middle  -->
+  <g filter="url(#glow)">
+    <line x1="62" y1="100" x2="138" y2="100" stroke="#050505" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="138" cy="100" r="10" fill="#050505"/>
+    <circle cx="138" cy="100" r="5" fill="#111"/>
+  </g>
+
+  <!-- Node 3 - bottom -->
+  <g filter="url(#glow)">
+    <line x1="72" y1="128" x2="128" y2="128" stroke="#050505" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="128" cy="128" r="10" fill="#050505"/>
+    <circle cx="128" cy="128" r="5" fill="#111"/>
+    <line x1="128" y1="118" x2="128" y2="112" stroke="#050505" stroke-width="7" stroke-linecap="round"/>
+  </g>
+
+  <!-- PIXEL DISSOLVE EFFECT — scattered pixels breaking out from left edge of shield -->
+  <!-- Row 1 — top pixels -->
+  <rect x="20" y="50" width="6" height="6" fill="#00e5ff" opacity="0.9" rx="0.5"/>
+  <rect x="10" y="56" width="4" height="4" fill="#00b4d8" opacity="0.7" rx="0.5"/>
+  <rect x="26" y="60" width="5" height="5" fill="#00e5ff" opacity="0.5" rx="0.5"/>
+  <rect x="14" y="66" width="3" height="3" fill="#0096c7" opacity="0.4" rx="0.5"/>
+  <rect x="5"  y="62" width="4" height="4" fill="#00e5ff" opacity="0.3" rx="0.5"/>
+
+  <!-- Row 2 -->
+  <rect x="22" y="72" width="7" height="7" fill="#00cfff" opacity="0.95" rx="0.5"/>
+  <rect x="12" y="78" width="5" height="5" fill="#00e5ff" opacity="0.8" rx="0.5"/>
+  <rect x="3"  y="74" width="4" height="4" fill="#00b4d8" opacity="0.5" rx="0.5"/>
+  <rect x="18" y="82" width="4" height="4" fill="#0096c7" opacity="0.4" rx="0.5"/>
+  <rect x="7"  y="88" width="3" height="3" fill="#00e5ff" opacity="0.3" rx="0.5"/>
+
+  <!-- Row 3 — densest near shield edge -->
+  <rect x="24" y="92"  width="6" height="6" fill="#00e5ff" opacity="1"   rx="0.5"/>
+  <rect x="15" y="96"  width="6" height="6" fill="#00cfff" opacity="0.9" rx="0.5"/>
+  <rect x="6"  y="92"  width="4" height="4" fill="#00b4d8" opacity="0.7" rx="0.5"/>
+  <rect x="2"  y="100" width="5" height="5" fill="#00e5ff" opacity="0.5" rx="0.5"/>
+  <rect x="10" y="104" width="4" height="4" fill="#0096c7" opacity="0.35" rx="0.5"/>
+
+  <!-- Row 4 -->
+  <rect x="22" y="110" width="7" height="7" fill="#00e5ff" opacity="0.95" rx="0.5"/>
+  <rect x="12" y="116" width="5" height="5" fill="#00cfff" opacity="0.75" rx="0.5"/>
+  <rect x="4"  y="112" width="4" height="4" fill="#00b4d8" opacity="0.5" rx="0.5"/>
+  <rect x="17" y="120" width="4" height="4" fill="#0096c7" opacity="0.35" rx="0.5"/>
+  <rect x="8"  y="124" width="3" height="3" fill="#00e5ff" opacity="0.2" rx="0.5"/>
+
+  <!-- Row 5 — fading out -->
+  <rect x="20" y="130" width="6" height="6" fill="#00cfff" opacity="0.8" rx="0.5"/>
+  <rect x="10" y="136" width="4" height="4" fill="#00b4d8" opacity="0.55" rx="0.5"/>
+  <rect x="26" y="138" width="5" height="5" fill="#00e5ff" opacity="0.35" rx="0.5"/>
+  <rect x="5"  y="142" width="3" height="3" fill="#0096c7" opacity="0.2" rx="0.5"/>
+  <rect x="15" y="144" width="3" height="3" fill="#00e5ff" opacity="0.15" rx="0.5"/>
 </svg>

@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import Link from 'next/link';
-import AgentGuardHero from '@/components/ui/hero-banner';
+import ResponsiveHeroBanner from '@/components/ui/responsive-hero-banner';
 
 
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -250,62 +250,8 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
-      {/* NAV */}
-      <nav className="fixed top-0 inset-x-0 z-50 border-b border-slate-800/60 bg-slate-950/80 backdrop-blur-md">
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-md bg-green-500 flex items-center justify-center">
-              <span className="text-black font-bold text-xs">AG</span>
-            </div>
-            <span className="font-semibold">AgentGuard</span>
-          </div>
-          <div className="flex items-center gap-6">
-            {[['#how-it-works','How it works'],['#failures','Failure modes'],['#demo','Demo']].map(([href, label]) => (
-              <a key={href} href={href} className="text-sm text-slate-400 hover:text-white transition-colors hidden md:block">{label}</a>
-            ))}
-            <Link href="/dashboard" className="px-4 py-1.5 bg-green-500 hover:bg-green-400 text-black font-semibold rounded-lg text-sm transition-colors">
-              Dashboard →
-            </Link>
-          </div>
-        </div>
-      </nav>
-
-      {/* HERO */}
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-xs font-medium mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-              CI/CD for AI Agents
-            </div>
-            <h1 className="text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              Break your AI agent{' '}
-              <span className="text-green-400">before</span>{' '}
-              your users do.
-            </h1>
-            <p className="text-slate-400 text-xl leading-relaxed mb-8">
-              Automated adversarial testing for autonomous agents. Find prompt injection,
-              tool loops, and destructive actions before they reach production.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <a href="#demo" className="inline-flex items-center gap-2 px-6 py-3 bg-red-500 hover:bg-red-400 text-white font-bold rounded-xl transition-all hover:scale-105 text-lg shadow-lg shadow-red-500/25">
-                🔥 Attack a Demo Agent
-              </a>
-              <Link href="/dashboard" className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-xl transition-colors text-lg">
-                Open Dashboard →
-              </Link>
-            </div>
-            <div className="flex gap-8 mt-10 pt-8 border-t border-slate-800">
-              {[['83','scenarios per run'],['12','failure types'],['5','pressure levels']].map(([n,l]) => (
-                <div key={l}><div className="text-2xl font-bold">{n}</div><div className="text-slate-500 text-sm">{l}</div></div>
-              ))}
-            </div>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
-            <TerminalAnimation />
-          </motion.div>
-        </div>
-      </section>
+      {/* NAV + HERO — full-screen cinematic hero with glassmorphism nav */}
+      <ResponsiveHeroBanner />
 
       {/* STATS */}
       <section className="py-16 px-6 border-y border-slate-800">

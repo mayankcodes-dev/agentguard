@@ -2,61 +2,85 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Design tokens ──────────────────────────────────────────────────────── */
 :root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-  --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --primary: 142.1 76.2% 36.3%;
-  --primary-foreground: 355.7 100% 97.3%;
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
-  --destructive: 0 84.2% 60.2%;
-  --ring: 142.1 76.2% 36.3%;
+  --bg-0: #09090b;
+  --bg-100: #18181b;
+  --bg-200: #27272a;
+  --bg-300: #3f3f46;
+  --text-100: #fafafa;
+  --text-200: #e4e4e7;
+  --text-300: #a1a1aa;
+  --text-400: #71717a;
   --radius: 0.5rem;
-}
 
-.dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-  --card: 222.2 84% 4.9%;
-  --card-foreground: 210 40% 98%;
-  --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
-  --primary: 142.1 70.6% 45.3%;
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
-  --accent: 217.2 32.6% 17.5%;
+  /* shadcn compat */
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 180 100% 50%;
+  --primary-foreground: 240 5.9% 10%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
   --destructive: 0 62.8% 30.6%;
-  --ring: 142.4 71.8% 29.2%;
+  --ring: 180 100% 50%;
+  --radius: 0.5rem;
 }
 
 * { @apply border-border; }
 body {
-  @apply bg-background text-foreground;
+  background: var(--bg-0);
+  color: var(--text-100);
   font-feature-settings: "rlig" 1, "calt" 1;
 }
 
-/* Terminal cursor blink */
+/* ─── Hero fade-slide-in animations ──────────────────────────────────────── */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-slide-in-1 { animation: fadeSlideIn 0.6s ease-out 0.1s both; }
+.animate-fade-slide-in-2 { animation: fadeSlideIn 0.6s ease-out 0.3s both; }
+.animate-fade-slide-in-3 { animation: fadeSlideIn 0.6s ease-out 0.5s both; }
+.animate-fade-slide-in-4 { animation: fadeSlideIn 0.6s ease-out 0.7s both; }
+
+/* ─── Terminal cursor blink ───────────────────────────────────────────────── */
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
 .cursor-blink { animation: blink 1s step-end infinite; }
 
-/* Scan line animation for terminal */
-@keyframes scan {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
-}
-
-/* Score ring animation */
+/* ─── Score ring fill animation ──────────────────────────────────────────── */
 @keyframes ring-fill {
   from { stroke-dashoffset: 283; }
-  to { stroke-dashoffset: var(--ring-offset); }
+  to   { stroke-dashoffset: var(--ring-offset); }
 }
 .score-ring { animation: ring-fill 1.5s ease-out forwards; }
+
+/* ─── Infinite marquee ────────────────────────────────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee { animation: marquee 25s linear infinite; }
+
+/* ─── Hover card lift ─────────────────────────────────────────────────────── */
+.card-hover {
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(0, 229, 255, 0.08);
+}
+
+/* ─── Instrument Serif font (loaded via Google Fonts in layout) ───────────── */
+.font-instrument-serif {
+  font-family: 'Instrument Serif', Georgia, serif;
+}

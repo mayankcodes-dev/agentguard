@@ -2,28 +2,72 @@ import { SignIn } from '@clerk/nextjs';
 
 export default function SignInPage() {
   return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-      <SignIn
-        appearance={{
-          elements: {
-            rootBox: 'mx-auto',
-            card: 'bg-slate-900 border border-slate-800 shadow-2xl',
-            headerTitle: 'text-white',
-            headerSubtitle: 'text-slate-400',
-            socialButtonsBlockButton: 'bg-slate-800 border-slate-700 text-white hover:bg-slate-700',
-            socialButtonsBlockButtonText: 'text-white',
-            dividerLine: 'bg-slate-700',
-            dividerText: 'text-slate-500',
-            formFieldLabel: 'text-slate-300',
-            formFieldInput: 'bg-slate-800 border-slate-700 text-white placeholder-slate-500 focus:border-green-500',
-            formButtonPrimary: 'bg-green-500 hover:bg-green-400 text-black font-semibold',
-            footerActionText: 'text-slate-400',
-            footerActionLink: 'text-green-400 hover:text-green-300',
-            identityPreviewText: 'text-white',
-            identityPreviewEditButton: 'text-green-400',
-          },
-        }}
+    <div className="min-h-screen bg-slate-950 flex items-center justify-center relative overflow-hidden">
+      {/* Background circuit image */}
+      <img
+        src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1920&q=80"
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ filter: 'brightness(0.15) contrast(1.3)' }}
       />
+      {/* Cyan radial glow */}
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse 60% 60% at 50% 40%, rgba(0,229,255,0.07) 0%, transparent 70%)' }} />
+
+      {/* Card */}
+      <div className="relative z-10 w-full max-w-md px-4">
+        {/* Logo header */}
+        <div className="flex flex-col items-center mb-8">
+          <img src="/logo.svg" alt="AgentGuard" className="w-16 h-16 mb-4" />
+          <h1 className="text-2xl font-bold text-white tracking-tight">Welcome back</h1>
+          <p className="text-sm text-slate-500 mt-1">Sign in to your AgentGuard account</p>
+        </div>
+
+        <SignIn
+          appearance={{
+            elements: {
+              rootBox: 'w-full',
+              card: 'bg-slate-900/90 backdrop-blur border border-white/[0.07] shadow-2xl shadow-black/50 rounded-2xl',
+              headerTitle: 'hidden',
+              headerSubtitle: 'hidden',
+              socialButtonsBlockButton:
+                'bg-white/[0.05] border border-white/[0.08] text-white hover:bg-white/[0.1] rounded-xl h-11 transition-colors',
+              socialButtonsBlockButtonText: 'text-white text-sm font-medium',
+              socialButtonsBlockButtonArrow: 'hidden',
+              dividerLine: 'bg-white/[0.07]',
+              dividerText: 'text-slate-500 text-xs',
+              formFieldLabel: 'text-slate-300 text-xs font-medium mb-1',
+              formFieldInput:
+                'bg-white/[0.05] border border-white/[0.08] text-white placeholder-slate-600 rounded-xl h-11 px-4 text-sm focus:border-cyan-500/50 focus:ring-0 focus:outline-none transition-colors',
+              formFieldInputShowPasswordButton: 'text-slate-500 hover:text-slate-300',
+              formButtonPrimary:
+                'bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-bold rounded-xl h-11 text-sm transition-colors shadow-lg shadow-cyan-500/20',
+              footerActionText: 'text-slate-500 text-xs',
+              footerActionLink: 'text-cyan-400 hover:text-cyan-300 font-medium transition-colors',
+              identityPreviewText: 'text-white text-sm',
+              identityPreviewEditButton: 'text-cyan-400 hover:text-cyan-300',
+              formResendCodeLink: 'text-cyan-400 hover:text-cyan-300',
+              alertText: 'text-red-400 text-xs',
+              alert: 'bg-red-500/10 border border-red-500/20 rounded-xl',
+              alternativeMethodsBlockButton:
+                'text-slate-400 hover:text-white bg-white/[0.03] border border-white/[0.06] rounded-xl text-sm transition-colors',
+              formFieldSuccessText: 'text-emerald-400 text-xs',
+            },
+            layout: {
+              socialButtonsVariant: 'blockButton',
+              logoPlacement: 'none',
+            },
+          }}
+        />
+
+        <p className="text-center text-xs text-slate-600 mt-6">
+          Designed by{' '}
+          <a href="https://mayankcodes.dev" target="_blank" rel="noopener noreferrer"
+            className="text-cyan-500/60 hover:text-cyan-400 transition-colors">
+            Mayank Singh
+          </a>
+        </p>
+      </div>
     </div>
   );
 }
