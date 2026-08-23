@@ -1,10 +1,12 @@
 <div align="center">
 
-# 🛡️ AgentGuard
+<img src="apps/web/public/logo.svg" width="120" height="120" alt="AgentGuard Logo" />
+
+# AgentGuard
 
 ### **The CI/CD Platform for AI Agents**
 
-*Automatically break your AI agent so your users never have to.*
+*Break your AI agent before your users do.*
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4-blue.svg)](https://www.typescriptlang.org/)
@@ -12,6 +14,8 @@
 [![Node.js](https://img.shields.io/badge/Node.js-20+-brightgreen.svg)](https://nodejs.org/)
 
 **[🔴 Attack a Demo Agent](#-demo) · [📖 Docs](#-architecture) · [🚀 Quick Start](#-quick-start)**
+
+> Designed &amp; developed by [**Mayank Singh**](https://mayankcodes.dev)
 
 </div>
 

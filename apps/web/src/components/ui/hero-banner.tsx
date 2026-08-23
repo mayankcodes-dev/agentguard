@@ -29,9 +29,7 @@ const AgentGuardHero: React.FC = () => {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-green-500 flex items-center justify-center shadow-lg shadow-green-500/30">
-                <span className="text-black font-bold text-xs">AG</span>
-              </div>
+              <img src="/logo.svg" alt="AgentGuard" className="w-9 h-9" />
               <span className="font-semibold text-white text-sm tracking-tight">AgentGuard</span>
             </Link>
 

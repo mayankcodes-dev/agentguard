@@ -434,14 +434,27 @@ export default function LandingPage() {
 
       {/* FOOTER */}
       <footer className="py-8 px-6 border-t border-slate-800">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded bg-green-500 flex items-center justify-center">
-              <span className="text-black font-bold text-xs">AG</span>
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          {/* Left — Logo + tagline */}
+          <div className="flex items-center gap-3">
+            <img src="/logo.svg" alt="AgentGuard Logo" className="w-9 h-9" />
+            <div>
+              <div className="font-semibold text-white text-sm">AgentGuard</div>
+              <div className="text-xs text-slate-500">Break your AI agent before your users do.</div>
             </div>
-            <span className="text-slate-400 text-sm">AgentGuard</span>
           </div>
-          <span className="text-slate-600 text-sm">CI/CD for AI Agents</span>
+          {/* Right — Credit */}
+          <p className="text-sm text-slate-500">
+            Designed &amp; developed by{' '}
+            <a
+              href="https://mayankcodes.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-green-400 hover:text-green-300 font-medium transition-colors"
+            >
+              Mayank Singh
+            </a>
+          </p>
         </div>
       </footer>
     </div>

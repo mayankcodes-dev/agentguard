@@ -1,9 +1,9 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const NAV = [
-  { href: '/dashboard', label: 'Overview' },
-  { href: '/dashboard/runs', label: 'Test Runs' },
-  { href: '/dashboard/agents/new', label: 'New Agent' },
+  { href: '/dashboard', label: '📊 Overview' },
+  { href: '/dashboard/agents/new', label: '+ New Agent' },
 ];
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -12,12 +12,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {/* Sidebar */}
       <aside className="w-56 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 fixed inset-y-0 left-0 z-40 flex flex-col">
         {/* Logo */}
-        <div className="h-14 px-5 flex items-center border-b border-slate-200 dark:border-slate-800">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-md bg-green-500 flex items-center justify-center">
-              <span className="text-black font-bold text-xs">AG</span>
-            </div>
-            <span className="font-semibold text-slate-900 dark:text-white">AgentGuard</span>
+        <div className="h-14 px-4 flex items-center border-b border-slate-200 dark:border-slate-800">
+          <Link href="/" className="flex items-center gap-2.5">
+            <img src="/logo.svg" alt="AgentGuard" className="w-8 h-8" />
+            <span className="font-semibold text-slate-900 dark:text-white text-sm">AgentGuard</span>
           </Link>
         </div>
 
@@ -31,10 +29,19 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           ))}
         </nav>
 
-        <div className="p-3 border-t border-slate-200 dark:border-slate-800">
+        {/* Sidebar footer */}
+        <div className="p-4 border-t border-slate-200 dark:border-slate-800 space-y-3">
           <Link href="/" className="px-3 py-2 text-xs text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 transition-colors block">
             ← Back to landing
           </Link>
+          {/* Credit */}
+          <p className="text-xs text-slate-400 px-3 leading-relaxed">
+            By{' '}
+            <a href="https://mayankcodes.dev" target="_blank" rel="noopener noreferrer"
+              className="text-green-400 hover:text-green-300 transition-colors font-medium">
+              Mayank Singh
+            </a>
+          </p>
         </div>
       </aside>
 
