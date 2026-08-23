@@ -100,7 +100,7 @@ const ResponsiveHeroBanner: React.FC = () => {
                 NEW
               </span>
               <span className="text-sm font-medium text-white/80 font-sans">
-                CI/CD for Autonomous AI Agents — 83 adversarial scenarios
+                CI/CD for AI Agents
               </span>
             </div>
 
@@ -112,10 +112,8 @@ const ResponsiveHeroBanner: React.FC = () => {
               <span className="text-cyan-400">before</span> they do.
             </h1>
 
-            <p className="sm:text-lg animate-fade-slide-in-3 text-base text-white/60 max-w-2xl mt-8 mx-auto font-sans leading-relaxed">
-              Industry benchmarks report AI agents failing on 70% of real-world tasks.
-              AgentGuard automatically generates adversarial tests, runs your agent in a sandboxed environment,
-              and scores 12 failure modes — before you ship.
+            <p className="sm:text-lg animate-fade-slide-in-3 text-base text-white/50 max-w-xl mt-8 mx-auto font-sans leading-relaxed">
+              83 adversarial scenarios. 12 failure types. Zero guessing.
             </p>
 
             {/* CTAs */}

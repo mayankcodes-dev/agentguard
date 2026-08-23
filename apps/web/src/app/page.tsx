@@ -272,44 +272,11 @@ export default function LandingPage() {
       </section>
 
 
-      {/* ─── OUR STORY — narrative statements (from the brief) ─────────────────── */}
-      <section className="py-24 px-6 overflow-hidden">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-xs text-slate-600 uppercase tracking-widest mb-12 text-center">The insight behind AgentGuard</p>
-          {[
-            "AI agents can pass traditional software tests while still failing behaviorally under adversarial pressure.",
-            "We built a CI/CD layer that continuously pressure-tests agents before deployment.",
-            "It combines deterministic trace analysis with semantic LLM evaluation.",
-            "Failures are classified, scored, streamed in real time, and stored as actionable traces.",
-            "Developers can identify and fix dangerous agent behavior before it reaches production.",
-          ].map((line, i) => (
-            <motion.div key={i}
-              initial={{ opacity: 0, x: -24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ delay: i * 0.12, duration: 0.5 }}
-              className="flex items-start gap-4 mb-8 group"
-            >
-              {i < 4 && (
-                <div className="flex flex-col items-center flex-shrink-0 mt-1">
-                  <div className="w-0.5 h-0 group-hover:h-8 bg-cyan-500/30 transition-all duration-500" />
-                </div>
-              )}
-              <div className="pl-5 border-l-2 border-cyan-500/20 group-hover:border-cyan-400/60 transition-colors">
-                <p className="text-lg sm:text-xl text-white/80 leading-relaxed group-hover:text-white transition-colors">
-                  {line}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* ─── PIPELINE FLOW — the run steps from image 2 ─────────────────────────── */}
-      <section className="py-16 px-6 bg-slate-900/40">
-        <div className="max-w-5xl mx-auto">
-          <p className="text-xs text-slate-600 uppercase tracking-widest mb-10 text-center">How a single run works</p>
-          <div className="flex flex-wrap items-center justify-center gap-2">
+      {/* ─── PIPELINE STEPPER — horizontal, no wrap ─────────────────────────────── */}
+      <section className="py-20 px-6 bg-slate-900/40 overflow-x-auto">
+        <div className="max-w-6xl mx-auto min-w-max">
+          <p className="text-xs text-slate-600 uppercase tracking-widest mb-10 text-center min-w-0">How a single run works</p>
+          <div className="flex items-center justify-center gap-0">
             {[
               { step: "Create evaluation", icon: "⚙" },
               { step: "Pressure scenario", icon: "⚡" },
@@ -319,19 +286,23 @@ export default function LandingPage() {
               { step: "Classification", icon: "🏷" },
               { step: "Score", icon: "📊" },
             ].map((s, i, arr) => (
-              <div key={s.step} className="flex items-center gap-2">
+              <div key={s.step} className="flex items-center">
                 <motion.div
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                  className="flex flex-col items-center gap-2 px-5 py-4 rounded-2xl bg-slate-950 ring-1 ring-white/[0.06] hover:ring-cyan-500/30 transition-all group"
+                  transition={{ delay: i * 0.07 }}
+                  className="flex flex-col items-center gap-2 px-5 py-5 rounded-2xl bg-slate-950 ring-1 ring-white/[0.06] hover:ring-cyan-500/40 hover:bg-slate-900 transition-all group w-36"
                 >
-                  <span className="text-xl">{s.icon}</span>
-                  <span className="text-xs font-mono text-slate-400 group-hover:text-white transition-colors whitespace-nowrap">{s.step}</span>
+                  <span className="text-2xl">{s.icon}</span>
+                  <span className="text-xs font-mono text-slate-500 group-hover:text-white transition-colors text-center leading-tight">{s.step}</span>
                 </motion.div>
                 {i < arr.length - 1 && (
-                  <span className="text-slate-700 text-lg">↓</span>
+                  <div className="flex items-center px-1">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-slate-700">
+                      <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
                 )}
               </div>
             ))}
