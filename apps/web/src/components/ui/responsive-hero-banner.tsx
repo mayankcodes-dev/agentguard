@@ -12,7 +12,15 @@ const NAV_LINKS: NavLink[] = [
   { label: "Demo", href: "#demo" },
 ];
 
-const TECH_STACK = ["MongoDB", "Redis", "Gemini AI", "BullMQ", "Fastify", "Next.js 14", "TypeScript"];
+const TECH_STACK = [
+  { name: "MongoDB",    icon: "https://cdn.simpleicons.org/mongodb/ffffff"    },
+  { name: "Redis",      icon: "https://cdn.simpleicons.org/redis/ffffff"      },
+  { name: "Gemini AI",  icon: "https://cdn.simpleicons.org/googlegemini/ffffff" },
+  { name: "BullMQ",     icon: "https://cdn.simpleicons.org/bull/ffffff"       },
+  { name: "Fastify",    icon: "https://cdn.simpleicons.org/fastify/ffffff"    },
+  { name: "Next.js 14", icon: "https://cdn.simpleicons.org/nextdotjs/ffffff"  },
+  { name: "TypeScript", icon: "https://cdn.simpleicons.org/typescript/ffffff" },
+];
 
 const ResponsiveHeroBanner: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -147,16 +155,24 @@ const ResponsiveHeroBanner: React.FC = () => {
             </div>
           </div>
 
-          {/* Tech stack marquee */}
-          <div className="mx-auto mt-20 max-w-5xl overflow-hidden">
-            <p className="animate-fade-slide-in-1 text-xs text-white/40 text-center tracking-widest uppercase font-sans mb-6">
+          {/* Tech stack — logos + names */}
+          <div className="mx-auto mt-20 max-w-5xl">
+            <p className="animate-fade-slide-in-1 text-xs text-white/30 text-center tracking-widest uppercase font-sans mb-8">
               Powered by battle-tested infrastructure
             </p>
-            <div className="flex items-center justify-center gap-8 flex-wrap">
-              {TECH_STACK.map(name => (
-                <span key={name} className="text-white/30 text-sm font-medium font-sans hover:text-white/60 transition-colors">
-                  {name}
-                </span>
+            <div className="flex items-end justify-center gap-8 flex-wrap">
+              {TECH_STACK.map(({ name, icon }) => (
+                <div key={name} className="flex flex-col items-center gap-2 group">
+                  <img
+                    src={icon}
+                    alt={name}
+                    width={28}
+                    height={28}
+                    className="opacity-30 group-hover:opacity-70 transition-opacity duration-300"
+                    style={{ filter: 'brightness(2)' }}
+                  />
+                  <span className="text-xs text-white/25 font-sans group-hover:text-white/50 transition-colors">{name}</span>
+                </div>
               ))}
             </div>
           </div>
