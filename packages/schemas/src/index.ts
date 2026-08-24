@@ -1,3 +1,3 @@
-export * from './agent.schema';
-export * from './run.schema';
-export * from './scenario.schema';
+export * from './agent.schema.js';
+export * from './run.schema.js';
+export * from './scenario.schema.js';
