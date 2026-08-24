@@ -51,18 +51,18 @@ export const runRoutes: FastifyPluginAsync = async (fastify) => {
       'Access-Control-Allow-Origin': '*',
     });
 
-    const { createClient } = await import('redis');
-    const subscriber = createClient({ url: process.env.REDIS_URL });
-    await subscriber.connect();
+    const { default: Redis } = await import('ioredis');
+    const subscriber = new Redis(process.env.REDIS_URL!);
 
     const channel = `run:${request.params.id}:progress`;
-    await subscriber.subscribe(channel, (message) => {
+    await subscriber.subscribe(channel);
+    subscriber.on('message', (_chan: string, message: string) => {
       reply.raw.write(`data: ${message}\n\n`);
     });
 
     request.raw.on('close', async () => {
       await subscriber.unsubscribe(channel);
-      await subscriber.disconnect();
+      await subscriber.quit();
     });
   });
 

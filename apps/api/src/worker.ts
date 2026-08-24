@@ -4,17 +4,17 @@ import { getRedisConnection } from './queue/redis.js';
 import { connectDB } from './db/connect.js';
 import { TestRun } from './db/models/TestRun.js';
 import { Scenario } from './db/models/Scenario.js';
+import type { IScenario } from './db/models/Scenario.js';
 import { Agent } from './db/models/Agent.js';
 import { generateScenarios } from './generators/scenarioGenerator.js';
 import { runScenario } from './sandbox/runner.js';
 import { computeScores } from './scoring/reliability.js';
 import { computeRegression } from './scoring/regression.js';
-import { createClient } from 'redis';
+import Redis from 'ioredis';
 
 async function processRun(job: Job) {
   const { runId, agentId, sandboxMode, isDemo } = job.data;
-  const publisher = createClient({ url: process.env.REDIS_URL });
-  await publisher.connect();
+  const publisher = new Redis(process.env.REDIS_URL!);
 
   const emit = async (event: object) => {
     await publisher.publish(`run:${runId}:progress`, JSON.stringify(event));
@@ -107,7 +107,7 @@ async function processRun(job: Job) {
     await emit({ type: 'error', message });
     throw error;
   } finally {
-    await publisher.disconnect();
+    await publisher.quit();
   }
 }
 

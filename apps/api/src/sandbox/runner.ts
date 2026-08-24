@@ -1,5 +1,4 @@
 import http from 'http';
-import httpProxy from 'http-proxy';
 import type { IAgent } from '../db/models/Agent.js';
 import type { IScenario } from '../db/models/Scenario.js';
 import type { TraceStep } from '@agentguard/types';
