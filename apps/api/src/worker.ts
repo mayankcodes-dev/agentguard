@@ -77,11 +77,11 @@ async function processRun(job: Job) {
     }
 
     // 5. Compute scores
-    const allScenarios = await Scenario.find({ runId }).lean();
+    const allScenarios = await Scenario.find({ runId }).lean() as unknown as IScenario[];
     const scores = computeScores(allScenarios);
 
     // 6. Regression analysis
-    const regression = await computeRegression(agentId, runId, scores.reliabilityScore, allScenarios);
+    const regression = await computeRegression(agentId, runId, scores.summary.reliabilityScore, allScenarios);
 
     // 7. Finalize run
     await TestRun.findByIdAndUpdate(runId, {
