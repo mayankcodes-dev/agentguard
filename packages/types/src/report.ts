@@ -1,5 +1,5 @@
-import type { TestRun, CategoryScores, RegressionDelta, RiskLevel } from './testRun';
-import type { Scenario, FailureType } from './scenario';
+import type { TestRun, CategoryScores, RegressionDelta, RiskLevel } from './testRun.js';
+import type { Scenario, FailureType } from './scenario.js';
 
 export interface TopVulnerability {
   failureType: FailureType;

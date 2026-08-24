@@ -34,3 +34,10 @@ export interface TestRun {
   categoryScores?: CategoryScores;
   error?: string;
 }
+export interface RegressionDelta {
+  previousRunId: string;
+  previousVersion?: string;
+  scoreDelta: number;
+  newFailures: string[];
+  isRegression: boolean;
+}
