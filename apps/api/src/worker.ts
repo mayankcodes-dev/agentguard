@@ -35,9 +35,9 @@ async function processRun(job: Job) {
     await emit({ type: 'status', status: 'running', message: `Generated ${generatedScenarios.length} scenarios. Starting execution...` });
 
     // 3. Save scenarios to DB
-    const scenarios = await Scenario.insertMany(
+    const scenarios = (await Scenario.insertMany(
       generatedScenarios.map(s => ({ ...s, runId, agentId, status: 'pending' }))
-    );
+    )) as unknown as IScenario[];
 
     await TestRun.findByIdAndUpdate(runId, { status: 'running' });
 
